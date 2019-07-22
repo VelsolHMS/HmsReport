@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmsReport", "HmsReport\HmsReport.csproj", "{8C895A8D-0956-4B49-BF11-3DEB17DBDF07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{8644135F-6429-4AD3-ADD4-8BADD840B589}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C895A8D-0956-4B49-BF11-3DEB17DBDF07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C895A8D-0956-4B49-BF11-3DEB17DBDF07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C895A8D-0956-4B49-BF11-3DEB17DBDF07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C895A8D-0956-4B49-BF11-3DEB17DBDF07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8644135F-6429-4AD3-ADD4-8BADD840B589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8644135F-6429-4AD3-ADD4-8BADD840B589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8644135F-6429-4AD3-ADD4-8BADD840B589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8644135F-6429-4AD3-ADD4-8BADD840B589}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79E8B10C-D2E7-4AB5-872A-56D8EDC9A3DD}
+	EndGlobalSection
+EndGlobal
