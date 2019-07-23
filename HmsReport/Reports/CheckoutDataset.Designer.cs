@@ -794,6 +794,8 @@ namespace HmsReport.Reports {
             
             private global::System.Data.DataColumn columnTBalance;
             
+            private global::System.Data.DataColumn columnDayTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public Datatable2DataTable() {
@@ -893,6 +895,14 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DayTotalColumn {
+                get {
+                    return this.columnDayTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -928,7 +938,7 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Datatable2Row AddDatatable2Row(string Date, string _Bill_voucher, string Debit, string Credit, string Balance, string TDebit, string TCredit, string TBalance) {
+            public Datatable2Row AddDatatable2Row(string Date, string _Bill_voucher, string Debit, string Credit, string Balance, string TDebit, string TCredit, string TBalance, string DayTotal) {
                 Datatable2Row rowDatatable2Row = ((Datatable2Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Date,
@@ -938,7 +948,8 @@ namespace HmsReport.Reports {
                         Balance,
                         TDebit,
                         TCredit,
-                        TBalance};
+                        TBalance,
+                        DayTotal};
                 rowDatatable2Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDatatable2Row);
                 return rowDatatable2Row;
@@ -969,6 +980,7 @@ namespace HmsReport.Reports {
                 this.columnTDebit = base.Columns["TDebit"];
                 this.columnTCredit = base.Columns["TCredit"];
                 this.columnTBalance = base.Columns["TBalance"];
+                this.columnDayTotal = base.Columns["DayTotal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -992,6 +1004,8 @@ namespace HmsReport.Reports {
                 base.Columns.Add(this.columnTCredit);
                 this.columnTBalance = new global::System.Data.DataColumn("TBalance", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTBalance);
+                this.columnDayTotal = new global::System.Data.DataColumn("DayTotal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDayTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1944,6 +1958,22 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DayTotal {
+                get {
+                    try {
+                        return ((string)(this[this.tableDatatable2.DayTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DayTotal\' in table \'Datatable2\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDatatable2.DayTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsDateNull() {
                 return this.IsNull(this.tableDatatable2.DateColumn);
             }
@@ -2036,6 +2066,18 @@ namespace HmsReport.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTBalanceNull() {
                 this[this.tableDatatable2.TBalanceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDayTotalNull() {
+                return this.IsNull(this.tableDatatable2.DayTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDayTotalNull() {
+                this[this.tableDatatable2.DayTotalColumn] = global::System.Convert.DBNull;
             }
         }
         
