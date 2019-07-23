@@ -52,7 +52,7 @@ namespace HmsReport.Model
         public DataTable TotalAmounts()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT Sum(Advance) AS Advance,Sum([Total After Discount]) AS Total,Sum([LUX Tax]) AS Tax,Sum([Discount Amount]) AS Discount  FROM Sheet1$ where [Invoice No] = '" + inv + "'";
+            string S = "SELECT Sum(Advance) AS Advance,Sum(Total) AS Tariff,Sum([Total After Discount]) AS Total,Sum([LUX Tax]) AS Tax,Sum([Discount Amount]) AS Discount  FROM Sheet1$ where [Invoice No] = '" + inv + "'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
