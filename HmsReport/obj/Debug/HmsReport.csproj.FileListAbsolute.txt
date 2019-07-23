@@ -4,7 +4,6 @@ C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\HmsReport.pdb
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.ReportSource.dll
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.Shared.dll
-C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\DAL.exe
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll
@@ -18,8 +17,6 @@ C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.Repo
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\stdole.dll
-C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\DAL.pdb
-C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport.csprojAssemblyReference.cache
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\MainWindow.g.cs
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\App.g.cs
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport_MarkupCompile.cache
@@ -32,3 +29,6 @@ C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport.csproj.Core
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport.csproj.CopyComplete
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport.exe
 C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport.pdb
+C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\DAL.exe
+C:\Users\Velsol\source\repos\HmsReport\HmsReport\bin\Debug\DAL.pdb
+C:\Users\Velsol\source\repos\HmsReport\HmsReport\obj\Debug\HmsReport.csprojAssemblyReference.cache
