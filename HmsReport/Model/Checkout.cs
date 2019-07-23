@@ -33,7 +33,7 @@ namespace HmsReport.Model
         public decimal TotalAfterDiscount;
         public decimal Advance;
         public decimal LUXTax;
-        public int ino,inv;
+        public int ino,inv,invoice;
 
         public DataTable InvoiceCount()
         {
@@ -53,6 +53,13 @@ namespace HmsReport.Model
         {
             var LIST = new List<SqlParameter>();
             string S = "SELECT Sum(Advance) AS Advance,Sum(Tariff) AS Tariff,Sum([LUX Tax]) AS Tax,Sum([Discount Amount]) AS Discount  FROM Sheet1$ where [Invoice No] = '" + inv + "'";
+            DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
+            return d;
+        }
+        public DataTable InvoiceData()
+        {
+            var LIST = new List<SqlParameter>();
+            string S = "SELECT Name,[Address Line 1],Area,State,[REG NO],[Room No],Pax,[Arrival Date],[Depature Date],[Invoice No],[Room Type],Tariff,[Arrival Time],[Depature Time] FROM Sheet1$ where [Invoice No] = '" + invoice + "'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
