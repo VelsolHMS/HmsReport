@@ -45,7 +45,7 @@ namespace HmsReport
         public DataRow row;
         public DataTable CheckoutData()
         {
-            DataTable d = new DataTable();
+            DataTable d = new DataTable(); 
             d.Columns.Add("Date", typeof(DateTime));
             d.Columns.Add("Bill/voucher", typeof(string));
             d.Columns.Add("Debit", typeof(decimal));
