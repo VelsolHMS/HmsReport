@@ -59,7 +59,8 @@ namespace HmsReport.Model
         public DataTable InvoiceData()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT Name,[Address Line 1],Area,State,[REG NO],[Room No],Pax,[Arrival Date],[Depature Date],[Invoice No],[Room Type],Tariff,[Arrival Time],[Depature Time] FROM Sheet1$ where [Invoice No] = '" + invoice + "'";
+            string S = "SELECT Name,[Address Line 1],Area,State,[REG NO],[Room No],"+
+                "Pax,CONVERT(VARCHAR(10),[Arrival Date],103) AS [Arrival Date], CONVERT(VARCHAR(10),[Depature Date],103) AS [Depature Date],[Invoice No],[Room Type],Tariff,[Arrival Time],[Depature Time] FROM Sheet1$ where [Invoice No] = '" + invoice + "'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }

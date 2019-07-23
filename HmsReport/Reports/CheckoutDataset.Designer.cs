@@ -559,7 +559,7 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public BillDetailsRow AddBillDetailsRow(string Name, string Address, string City, string State, string ResNo, string Room, string Pax, string Invoice, string Type, string Tarrif, string ArrivalDate, string DepartureDate, string ArrivalTime, string DepartureTime) {
+            public BillDetailsRow AddBillDetailsRow(string Name, string Address, string City, string State, string ResNo, string Room, string Pax, string Invoice, string Type, string Tarrif, System.DateTime ArrivalDate, System.DateTime DepartureDate, System.DateTime ArrivalTime, System.DateTime DepartureTime) {
                 BillDetailsRow rowBillDetailsRow = ((BillDetailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Name,
@@ -637,13 +637,13 @@ namespace HmsReport.Reports {
                 base.Columns.Add(this.columnType);
                 this.columnTarrif = new global::System.Data.DataColumn("Tarrif", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTarrif);
-                this.columnArrivalDate = new global::System.Data.DataColumn("ArrivalDate", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnArrivalDate = new global::System.Data.DataColumn("ArrivalDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnArrivalDate);
-                this.columnDepartureDate = new global::System.Data.DataColumn("DepartureDate", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDepartureDate = new global::System.Data.DataColumn("DepartureDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDepartureDate);
-                this.columnArrivalTime = new global::System.Data.DataColumn("ArrivalTime", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnArrivalTime = new global::System.Data.DataColumn("ArrivalTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnArrivalTime);
-                this.columnDepartureTime = new global::System.Data.DataColumn("DepartureTime", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDepartureTime = new global::System.Data.DataColumn("DepartureTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDepartureTime);
             }
             
@@ -938,7 +938,7 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Datatable2Row AddDatatable2Row(string Date, string _Bill_voucher, string Debit, string Credit, string Balance, string TDebit, string TCredit, string TBalance, string DayTotal) {
+            public Datatable2Row AddDatatable2Row(System.DateTime Date, string _Bill_voucher, string Debit, string Credit, string Balance, string TDebit, string TCredit, string TBalance, string DayTotal) {
                 Datatable2Row rowDatatable2Row = ((Datatable2Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Date,
@@ -986,7 +986,7 @@ namespace HmsReport.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
-                this.columnDate = new global::System.Data.DataColumn("Date", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDate);
                 this._columnBill_voucher = new global::System.Data.DataColumn("Bill/voucher", typeof(string), null, global::System.Data.MappingType.Element);
                 this._columnBill_voucher.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnBill_voucher");
@@ -1145,6 +1145,8 @@ namespace HmsReport.Reports {
             
             private global::System.Data.DataColumn columnGrandTotal;
             
+            private global::System.Data.DataColumn columnTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataTable1DataTable() {
@@ -1204,6 +1206,14 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TotalColumn {
+                get {
+                    return this.columnTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1239,12 +1249,13 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Discount, string Tax, string GrandTotal) {
+            public DataTable1Row AddDataTable1Row(string Discount, string Tax, string GrandTotal, string Total) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Discount,
                         Tax,
-                        GrandTotal};
+                        GrandTotal,
+                        Total};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -1270,6 +1281,7 @@ namespace HmsReport.Reports {
                 this.columnDiscount = base.Columns["Discount"];
                 this.columnTax = base.Columns["Tax"];
                 this.columnGrandTotal = base.Columns["GrandTotal"];
+                this.columnTotal = base.Columns["Total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1281,6 +1293,8 @@ namespace HmsReport.Reports {
                 base.Columns.Add(this.columnTax);
                 this.columnGrandTotal = new global::System.Data.DataColumn("GrandTotal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGrandTotal);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1583,10 +1597,10 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string ArrivalDate {
+            public System.DateTime ArrivalDate {
                 get {
                     try {
-                        return ((string)(this[this.tableBillDetails.ArrivalDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableBillDetails.ArrivalDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ArrivalDate\' in table \'BillDetails\' is DBNull.", e);
@@ -1599,10 +1613,10 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string DepartureDate {
+            public System.DateTime DepartureDate {
                 get {
                     try {
-                        return ((string)(this[this.tableBillDetails.DepartureDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableBillDetails.DepartureDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DepartureDate\' in table \'BillDetails\' is DBNull.", e);
@@ -1615,10 +1629,10 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string ArrivalTime {
+            public System.DateTime ArrivalTime {
                 get {
                     try {
-                        return ((string)(this[this.tableBillDetails.ArrivalTimeColumn]));
+                        return ((global::System.DateTime)(this[this.tableBillDetails.ArrivalTimeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ArrivalTime\' in table \'BillDetails\' is DBNull.", e);
@@ -1631,10 +1645,10 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string DepartureTime {
+            public System.DateTime DepartureTime {
                 get {
                     try {
-                        return ((string)(this[this.tableBillDetails.DepartureTimeColumn]));
+                        return ((global::System.DateTime)(this[this.tableBillDetails.DepartureTimeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DepartureTime\' in table \'BillDetails\' is DBNull.", e);
@@ -1830,10 +1844,10 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string Date {
+            public System.DateTime Date {
                 get {
                     try {
-                        return ((string)(this[this.tableDatatable2.DateColumn]));
+                        return ((global::System.DateTime)(this[this.tableDatatable2.DateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'Datatable2\' is DBNull.", e);
@@ -2145,6 +2159,22 @@ namespace HmsReport.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Total {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'DataTable1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsDiscountNull() {
                 return this.IsNull(this.tableDataTable1.DiscountColumn);
             }
@@ -2177,6 +2207,18 @@ namespace HmsReport.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetGrandTotalNull() {
                 this[this.tableDataTable1.GrandTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tableDataTable1.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tableDataTable1.TotalColumn] = global::System.Convert.DBNull;
             }
         }
         
