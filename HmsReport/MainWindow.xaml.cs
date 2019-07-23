@@ -13,7 +13,7 @@ namespace HmsReport
     {
         public int incount,staydays;
         public DateTime arrdate;
-        public decimal adv,trf,tax,td,tc,gtot,gtax,dis;
+        public decimal adv,trf,tax,td,tc,gtot,gtax,dis,adv1;
         public MainWindow()
         {
             InitializeComponent();
@@ -122,8 +122,8 @@ namespace HmsReport
             d.Columns.Add("Tarrif", typeof(decimal));
             d.Columns.Add("ArrivalDate", typeof(string));
             d.Columns.Add("DepartureDate", typeof(string));
-            d.Columns.Add("ArrivalTime", typeof(string));
-            d.Columns.Add("DepartureTime", typeof(string));
+            d.Columns.Add("ArrivalTime", typeof(DateTime));
+            d.Columns.Add("DepartureTime", typeof(DateTime));
 
             DataTable dt = ch.InvoiceData();
             DataRow row = d.NewRow();
@@ -151,17 +151,20 @@ namespace HmsReport
             d.Columns.Add("GrandTotal", typeof(decimal));
             d.Columns.Add("Tax", typeof(decimal));
             d.Columns.Add("Discount", typeof(decimal));
+            d.Columns.Add("Total", typeof(decimal));
             DataTable da = ch.TotalAmounts();
             for(int j = 0; j< da.Rows.Count;j++)
             {
                 DataRow row = d.NewRow();
+                adv1 = Convert.ToDecimal(da.Rows[0]["Advance"].ToString());
                 gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
                 gtax = Convert.ToDecimal(da.Rows[0]["Tax"])*staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
                 { dis = Convert.ToDecimal(0.00); }
                 else
                 { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
-                row["GrandTotal"] = (gtot - dis) + gtax ;
+                row["GrandTotal"] = (gtot - adv1) + gtax ;
+                row["Total"] = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
                 row["Tax"] = gtax;
                 row["Discount"] = dis;
                 d.Rows.Add(row);
