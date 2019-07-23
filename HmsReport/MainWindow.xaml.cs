@@ -45,13 +45,13 @@ namespace HmsReport
         public DataRow row;
         public DataTable CheckoutData()
         {
-
             DataTable d = new DataTable();
             d.Columns.Add("Date", typeof(DateTime));
             d.Columns.Add("Bill/voucher", typeof(string));
             d.Columns.Add("Debit", typeof(decimal));
             d.Columns.Add("Credit", typeof(decimal));
             d.Columns.Add("Balance", typeof(decimal));
+            d.Columns.Add("DayTotal", typeof(string));
             d.Columns.Add("TDebit", typeof(decimal));
             d.Columns.Add("TCredit", typeof(decimal));
             d.Columns.Add("TBalance", typeof(decimal));
@@ -97,11 +97,11 @@ namespace HmsReport
                         d.Rows.Add(row);
                     }
                     td = trf + tax;
+                    row["DayTotal"] = "Day Total";
                     row["TDebit"] = td;
                     tc = adv;
                     row["TCredit"] = tc;
                     row["TBalance"] = td - tc;
-                    
                 }
                 ch.ino++;
             }
