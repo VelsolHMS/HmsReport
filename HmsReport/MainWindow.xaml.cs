@@ -26,7 +26,7 @@ namespace HmsReport
             ReportDocument re = new ReportDocument();
             DataTable dkr = ch.InvoiceCount();
             incount = Convert.ToInt32(dkr.Rows[0]["Invoice"]);
-            for (int i = 1; i < incount; i++)
+            for (int i = 1; i <= incount; i++)
             {
                 DataTable dt = CheckoutData();
                 re.Load("../../Reports/CheckoutSubReport2.rpt");
