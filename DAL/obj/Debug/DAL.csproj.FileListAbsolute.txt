@@ -330,3 +330,4 @@ C:\Users\Velsol\source\repos\HmsReport\DAL\obj\Debug\DAL.csproj.GenerateResource
 C:\Users\Velsol\source\repos\HmsReport\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 C:\Users\Velsol\source\repos\HmsReport\DAL\obj\Debug\DAL.exe
 C:\Users\Velsol\source\repos\HmsReport\DAL\obj\Debug\DAL.pdb
+C:\Users\Velsol\source\repos\HmsReport\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

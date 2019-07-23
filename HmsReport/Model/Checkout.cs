@@ -11,25 +11,49 @@ namespace HmsReport.Model
 {
     class Checkout
     {
-        public DataTable getdetails()
+        public int InvoiceNo;
+        public string Name;
+        public string AddressLine1;
+        public string Area;
+        public string State;
+        public string Country;
+        public int REGNO;
+        public int RoomNo;
+        public int Pax;
+        public DateTime ArrivalDate;
+        public DateTime ArrivalTime;
+        public int StayedDays;
+        public DateTime DepatureDays;
+        public DateTime DepatureTime;
+        public string RoomType;
+        public decimal Tariff;
+        public decimal Total;
+        public decimal Discount;
+        public decimal DiscountAmount;
+        public decimal TotalAfterDiscount;
+        public decimal Advance;
+        public decimal LUXTax;
+        public int ino,inv;
+
+        public DataTable InvoiceCount()
         {
-            var list = new List<SqlParameter>();
-            string s = "SELECT Name,[Address Line 1],State,Area,[REG NO],[Room No],Pax,[Arrival Date],[Arrival Time],[Depature Date],[Depature Time],[Invoice No],[Room No],Tariff FROM Sheet1$  WHERE [Invoice No]='" + MainWindow.invo + "'";
-            DataTable d = DbFunctions.ExecuteCommand<DataTable>(s, list);
+            var LIST = new List<SqlParameter>();
+            string S = "SELECT Count([Invoice No]) AS Invoice FROM Sheet1$";
+            DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
-        public DataTable getcheckouts()
+        public DataTable TariffAmounts()
         {
-            var list = new List<SqlParameter>();
-            string s = "SELECT [Arrival Date],[Depature Date],Advance,Tariff,[LUX Tax],[Stayed Days] FROM Sheet1$ WHERE [Invoice No]='"+MainWindow.invo+"'";
-            DataTable d = DbFunctions.ExecuteCommand<DataTable>(s, list);
+            var LIST = new List<SqlParameter>();
+            string S = "SELECT [Arrival Date],Advance,Tariff,[Stayed Days],[LUX Tax] FROM Sheet1$ where [Invoice No] = '" + ino+"'";
+            DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
-        public DataTable getinvoice()
+        public DataTable TotalAmounts()
         {
-            var list = new List<SqlParameter>();
-            string s = "SELECT COUNT([Invoice No]) as InvoiceNo FROM Sheet1$ ";
-            DataTable d = DbFunctions.ExecuteCommand<DataTable>(s, list);
+            var LIST = new List<SqlParameter>();
+            string S = "SELECT Sum(Advance) AS Advance,Sum(Tariff) AS Tariff,Sum([LUX Tax]) AS Tax,Sum([Discount Amount]) AS Discount  FROM Sheet1$ where [Invoice No] = '" + inv + "'";
+            DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
     }

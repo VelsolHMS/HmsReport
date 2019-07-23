@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Submit" Width="150" Height="50" FontSize="23" Click="Button_Click" FontWeight="Bold" Background="SkyBlue"></Button>
+        <Button Name="Save" Width="100" Height="30" Click="Save_Click"/>
     </Grid>
 </Window>

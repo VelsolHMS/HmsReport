@@ -1,8 +1,8 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
-using System.Data;
-using System.Windows;
 using HmsReport.Model;
 using System;
+using System.Data;
+using System.Windows;
 
 namespace HmsReport
 {
@@ -11,152 +11,128 @@ namespace HmsReport
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int incount,staydays;
+        public DateTime arrdate;
+        public decimal adv,trf,tax,td,tc,gtot,gtax,dis;
         public MainWindow()
         {
             InitializeComponent();
+            ch.ino = 1;
+            ch.inv = 1;
         }
         Checkout ch = new Checkout();
-        public DateTime arrdate, depdate;
-        public int staydays;
-        public DataTable s;
-        public static int invo = 1;
-        public int invoice;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
             ReportDocument re = new ReportDocument();
-            DataTable di = ch.getinvoice();
-            invoice =Convert.ToInt32(di.Rows[0]["InvoiceNo"]);
-            for (int i=1;i<=invoice;i++)
+            DataTable dkr = ch.InvoiceCount();
+            incount = Convert.ToInt32(dkr.Rows[0]["Invoice"]);
+            for (int i = 1; i <= incount; i++)
             {
-                s = hoteldetails();
+                DataTable dt = CheckoutData();
                 re.Load("../../Reports/CheckoutSubReport2.rpt");
-                DataTable s1 = checkoutdata();
+                DataTable d = HotelData();
                 re.Load("../../Reports/CheckoutSubReport.rpt");
-                DataTable s2 = main();
+                DataTable dd = Report();
                 re.Load("../../Reports/CheckoutReport.rpt");
-                re.Subreports[1].SetDataSource(s);
-                re.Subreports[0].SetDataSource(s1);
-                re.SetDataSource(s2);
-                re.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+                re.Subreports[1].SetDataSource(dt);
+                re.Subreports[0].SetDataSource(d);
+                re.SetDataSource(dd);
                 re.PrintToPrinter(0, false, 0, 0);
                 re.Refresh();
             }
         }
-        public DataTable hoteldetails()
+        public DataRow row;
+        public DataTable CheckoutData()
         {
-            DataTable dd = new DataTable();
-            dd.Columns.Add("Name", typeof(string));
-            dd.Columns.Add("Address", typeof(string));
-            dd.Columns.Add("State", typeof(string));
-            dd.Columns.Add("City", typeof(string));
-            DataTable dt = ch.getdetails();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            DataTable d = new DataTable();
+            d.Columns.Add("Date", typeof(DateTime));
+            d.Columns.Add("Bill/voucher", typeof(string));
+            d.Columns.Add("Debit", typeof(decimal));
+            d.Columns.Add("Credit", typeof(decimal));
+            d.Columns.Add("Balance", typeof(decimal));
+            d.Columns.Add("TDebit", typeof(decimal));
+            d.Columns.Add("TCredit", typeof(decimal));
+            d.Columns.Add("TBalance", typeof(decimal));
+            DataTable dd = ch.TariffAmounts();
+            for (int j = 1; j <= dd.Rows.Count; j++)
             {
-                DataRow row = dd.NewRow();
-                row["Name"] = dt.Rows[i]["Name"].ToString();
-                row["Address"] = dt.Rows[i]["Address Line 1"].ToString();
-                row["State"] = dt.Rows[i]["State"].ToString();
-                row["City"] = dt.Rows[i]["Area"].ToString();
-                dd.Rows.Add(row);
+                staydays = Convert.ToInt32(dd.Rows[0]["Stayed Days"]);
+                arrdate = Convert.ToDateTime(dd.Rows[0]["Arrival Date"]);
+                for (int i = 0; i < staydays; i++)
+                {
+                    for (int k = 1; k <= 4; k++)
+                    {
+                        row = d.NewRow();
+                        if (k == 1)
+                        {
+                            row["Date"] = arrdate.AddDays(i);
+                            row["Bill/voucher"] = "Advance";
+                            if(i == 0)
+                            { adv = Convert.ToDecimal(dd.Rows[0]["Advance"]); row["Credit"] = adv; }
+                            else { adv = Convert.ToDecimal(0.00); row["Credit"] = adv; }
+                            
+                        }
+                        else if (k == 2)
+                        {
+                            row["Date"] = arrdate.AddDays(i);
+                            row["Bill/voucher"] = "Tarrif Amount";
+                            trf = Convert.ToDecimal(dd.Rows[0]["Tariff"]); ///staydays;
+                            row["Debit"] = trf;
+                        }
+                        else if (k == 3)
+                        {
+                            row["Date"] = arrdate.AddDays(i);
+                            row["Bill/voucher"] = "LUX-Taxes";
+                            tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"]); // / staydays;
+                            row["Debit"] = tax;
+                        }
+                        else if (k == 4)
+                        {
+                            row["Date"] = arrdate.AddDays(i);
+                            row["Bill/voucher"] = "SER-Taxes";
+                            row["Debit"] = "0.00";
+                        }
+                        d.Rows.Add(row);
+                    }
+                    td = trf + tax;
+                    row["TDebit"] = td;
+                    tc = adv;
+                    row["TCredit"] = tc;
+                    row["TBalance"] = td - tc;
+                    
+                }
+                ch.ino++;
             }
-            return dd;
+            return d;
         }
-        public DataTable main()
+        public DataTable HotelData()
         {
-            DataTable dd = new DataTable();
-            dd.Columns.Add("Discount", typeof(decimal));
-            dd.Columns.Add("Tax", typeof(decimal));
-            dd.Columns.Add("GrandTotal", typeof(decimal));
-            return dd;
-
+            DataTable d = new DataTable();
+            return d;
         }
-        public decimal tarrif,adva,tax;
-        public DataTable checkoutdata()
+        public DataTable Report()
         {
-            DataTable dd = new DataTable();
-            dd.Columns.Add("Date", typeof(DateTime));
-            dd.Columns.Add("Bill/voucher", typeof(string));
-            dd.Columns.Add("Debit", typeof(decimal));
-            dd.Columns.Add("Credit", typeof(decimal));
-            dd.Columns.Add("Balance", typeof(decimal));
-            dd.Columns.Add("TDebit", typeof(decimal));
-            dd.Columns.Add("TCredit", typeof(decimal));
-            dd.Columns.Add("TBalance", typeof(decimal));
-            DataTable dtt = ch.getcheckouts();
-            arrdate = Convert.ToDateTime(dtt.Rows[0]["Arrival Date"]);
-            staydays =Convert.ToInt32(dtt.Rows[0]["Stayed Days"]);
-            for(int i=0;i<=staydays;i++)
+            DataTable d = new DataTable();
+            d.Columns.Add("GrandTotal", typeof(decimal));
+            d.Columns.Add("Tax", typeof(decimal));
+            d.Columns.Add("Discount", typeof(decimal));
+            DataTable da = ch.TotalAmounts();
+            for(int j = 0; j< da.Rows.Count;j++)
             {
-                DataTable dv = voucher();
-                for (int k = 0; k < dv.Rows.Count; k++)
-                {
-                    DataRow row = dd.NewRow();
-                    row["Date"] = arrdate.AddDays(i);
-                    row["Bill/voucher"] = dv.Rows[k]["Vou"].ToString();
-                    if (dv.Rows[k]["Vou"].ToString() == "Advance")
-                    {
-                        adva = Convert.ToDecimal(dtt.Rows[0]["Advance"]);
-                        row["Credit"] = dtt.Rows[0]["Advance"].ToString();
-                        row["Debit"] = "0.00";
-                        row["Balance"] = "0.00";
-                    }
-                    else if (dv.Rows[k]["Vou"].ToString() == "Tarrif Amount")
-                    {
-                        row["Credit"] = "0.00";
-                        tarrif =Convert.ToDecimal(dtt.Rows[0]["Tariff"]);
-                        row["Debit"] = dtt.Rows[0]["Tariff"].ToString();
-                        row["Balance"] = "0.00";
-                    }
-                    else if (dv.Rows[k]["Vou"].ToString() == "LUX-Taxes")
-                    {
-                        row["Credit"] = "0.00";
-                        tax= Convert.ToDecimal(dtt.Rows[0]["LUX Tax"]);
-                        row["Debit"] = dtt.Rows[0]["LUX Tax"].ToString();
-                        row["Balance"] = "0.00";
-                    }
-                    else if (dv.Rows[k]["Vou"].ToString() == "SER-Taxes")
-                    {
-                        row["Credit"] = "0.00";
-                        row["Debit"] = "0.00";
-                        row["Balance"] = "0.00";
-                        tarrif = 0;tax = 0;adva = 0;
-                    }
-                    row["TDebit"] = tarrif + tax;
-                    row["TCredit"] = adva;
-                    row["TBalance"] = (tarrif + tax) - adva;
-                    dd.Rows.Add(row);
-                }
+                DataRow row = d.NewRow();
+                gtot = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
+                gtax = Convert.ToDecimal(da.Rows[0]["Tax"].ToString());
+                if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
+                { dis = Convert.ToDecimal(0.00); }
+                else
+                { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
+                row["GrandTotal"] = (gtot + gtax) - dis ;
+                row["Tax"] = gtax;
+                row["Discount"] = dis;
+                d.Rows.Add(row);
             }
-            invo++;
-            return dd;
-        }
-        public string vou;
-        public DataTable voucher()
-        {
-            DataTable ddv = new DataTable();
-            ddv.Columns.Add("Vou", typeof(string));
-            for(int i=1;i<=4;i++)
-            {
-                DataRow row = ddv.NewRow();
-                if (i == 1)
-                {
-                    row["Vou"] = "Advance";
-                }
-                else if(i == 2)
-                {
-                    row["Vou"] = "Tarrif Amount";
-                }
-                else if (i == 3)
-                {
-                    row["Vou"] = "LUX-Taxes";
-                }
-                else if (i == 4)
-                {
-                    row["Vou"] = "SER-Taxes";
-                }
-                ddv.Rows.Add(row);
-            }
-            return ddv;
+            ch.inv++;
+            return d;
         }
     }
 }
