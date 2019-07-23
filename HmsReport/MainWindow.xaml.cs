@@ -19,6 +19,7 @@ namespace HmsReport
             InitializeComponent();
             ch.ino = 1;
             ch.inv = 1;
+            ch.invoice = 1;
         }
         Checkout ch = new Checkout();
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -44,7 +45,7 @@ namespace HmsReport
         public DataRow row;
         public DataTable CheckoutData()
         {
-            DataTable d = new DataTable();
+            DataTable d = new DataTable(); 
             d.Columns.Add("Date", typeof(DateTime));
             d.Columns.Add("Bill/voucher", typeof(string));
             d.Columns.Add("Debit", typeof(decimal));
@@ -109,6 +110,39 @@ namespace HmsReport
         public DataTable HotelData()
         {
             DataTable d = new DataTable();
+            d.Columns.Add("Name", typeof(string));
+            d.Columns.Add("Address", typeof(string));
+            d.Columns.Add("City", typeof(string));
+            d.Columns.Add("State", typeof(string));
+            d.Columns.Add("ResNo", typeof(string));
+            d.Columns.Add("Room", typeof(string));
+            d.Columns.Add("Pax", typeof(string));
+            d.Columns.Add("Invoice", typeof(string));
+            d.Columns.Add("Type", typeof(string));
+            d.Columns.Add("Tarrif", typeof(decimal));
+            d.Columns.Add("ArrivalDate", typeof(string));
+            d.Columns.Add("DepartureDate", typeof(string));
+            d.Columns.Add("ArrivalTime", typeof(string));
+            d.Columns.Add("DepartureTime", typeof(string));
+
+            DataTable dt = ch.InvoiceData();
+            DataRow row = d.NewRow();
+            row["Name"] = dt.Rows[0]["Name"].ToString();
+            row["Address"] = dt.Rows[0]["Address Line 1"].ToString();
+            row["City"] = dt.Rows[0]["Area"].ToString();
+            row["State"] = dt.Rows[0]["State"].ToString();
+            row["ResNo"] = dt.Rows[0]["REG NO"].ToString();
+            row["Room"] = dt.Rows[0]["Room No"].ToString();
+            row["Pax"] = dt.Rows[0]["Pax"].ToString();
+            row["Invoice"] = dt.Rows[0]["Invoice No"].ToString();
+            row["Type"] = dt.Rows[0]["Room Type"].ToString();
+            row["Tarrif"] = dt.Rows[0]["Tariff"].ToString();
+            row["ArrivalDate"] = dt.Rows[0]["Arrival Date"].ToString();
+            row["DepartureDate"] = dt.Rows[0]["Depature Date"].ToString();
+            row["ArrivalTime"] = dt.Rows[0]["Arrival Time"].ToString();
+            row["DepartureTime"] = dt.Rows[0]["Depature Time"].ToString();
+            d.Rows.Add(row);
+            ch.invoice++;
             return d;
         }
         public DataTable Report()
@@ -121,13 +155,13 @@ namespace HmsReport
             for(int j = 0; j< da.Rows.Count;j++)
             {
                 DataRow row = d.NewRow();
-                gtot = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
-                gtax = Convert.ToDecimal(da.Rows[0]["Tax"].ToString());
+                gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
+                gtax = Convert.ToDecimal(da.Rows[0]["Tax"])*staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
                 { dis = Convert.ToDecimal(0.00); }
                 else
                 { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
-                row["GrandTotal"] = (gtot + gtax) - dis ;
+                row["GrandTotal"] = (gtot - dis) + gtax ;
                 row["Tax"] = gtax;
                 row["Discount"] = dis;
                 d.Rows.Add(row);
