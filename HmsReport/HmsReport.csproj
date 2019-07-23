@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CheckoutClass.cs" />
     <Compile Include="Reports\CheckoutDataset.cs">
       <DependentUpon>CheckoutDataset.xsd</DependentUpon>
     </Compile>
