@@ -45,7 +45,7 @@ namespace HmsReport
         public DataRow row;
         public DataTable CheckoutData()
         {
-            DataTable d = new DataTable();
+            DataTable d = new DataTable(); 
             d.Columns.Add("Date", typeof(DateTime));
             d.Columns.Add("Bill/voucher", typeof(string));
             d.Columns.Add("Debit", typeof(decimal));
@@ -155,13 +155,13 @@ namespace HmsReport
             for(int j = 0; j< da.Rows.Count;j++)
             {
                 DataRow row = d.NewRow();
-                gtot = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
-                gtax = Convert.ToDecimal(da.Rows[0]["Tax"].ToString());
+                gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
+                gtax = Convert.ToDecimal(da.Rows[0]["Tax"])*staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
                 { dis = Convert.ToDecimal(0.00); }
                 else
                 { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
-                row["GrandTotal"] = (gtot + gtax) - dis ;
+                row["GrandTotal"] = (gtot - dis) + gtax ;
                 row["Tax"] = gtax;
                 row["Discount"] = dis;
                 d.Rows.Add(row);
