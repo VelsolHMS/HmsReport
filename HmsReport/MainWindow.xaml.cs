@@ -151,6 +151,7 @@ namespace HmsReport
             d.Columns.Add("GrandTotal", typeof(decimal));
             d.Columns.Add("Tax", typeof(decimal));
             d.Columns.Add("Discount", typeof(decimal));
+            d.Columns.Add("Total", typeof(decimal));
             DataTable da = ch.TotalAmounts();
             for(int j = 0; j< da.Rows.Count;j++)
             {
@@ -163,6 +164,7 @@ namespace HmsReport
                 else
                 { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
                 row["GrandTotal"] = (gtot - adv1) + gtax ;
+                row["Total"] = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
                 row["Tax"] = gtax;
                 row["Discount"] = dis;
                 d.Rows.Add(row);
