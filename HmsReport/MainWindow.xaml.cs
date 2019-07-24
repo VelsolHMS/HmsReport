@@ -89,12 +89,12 @@ namespace HmsReport
                             tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"]); // / staydays;
                             row["Debit"] = tax;
                         }
-                        //else if (k == 4)
-                        //{
-                        //    row["Date"] = i;
-                        //    row["Bill/voucher"] = "SER-Taxes";
-                        //    row["Debit"] = "0.00";
-                        //}
+                        else if (k == 4)
+                        {
+                            row["Date"] = i;
+                            row["Bill/voucher"] = "SER-Taxes";
+                            row["Debit"] = "0.00";
+                        }
                         d.Rows.Add(row);
                     }
                     td = trf + tax;
@@ -161,10 +161,10 @@ namespace HmsReport
                 gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
                 gtax = Convert.ToDecimal(da.Rows[0]["Tax"])*staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
-                { dis = Convert.ToDecimal(0.00); }
+                {dis = Convert.ToDecimal(0.00);}
                 else
-                { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
-                row["GrandTotal"] = (gtot - adv1) + gtax ;
+                { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString());}
+                row["GrandTotal"] = (gtot - adv1) + gtax;
                 row["Total"] = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
                 row["Tax"] = gtax;
                 row["Discount"] = dis;
