@@ -12,7 +12,7 @@ namespace HmsReport
     public partial class MainWindow : Window
     {
         public int incount,staydays;
-        public DateTime arrdate;
+        public DateTime arrdate,deptdate;
         public decimal adv,trf,tax,td,tc,gtot,gtax,dis,adv1;
         public MainWindow()
         {
@@ -60,40 +60,41 @@ namespace HmsReport
             {
                 staydays = Convert.ToInt32(dd.Rows[0]["Stayed Days"]);
                 arrdate = Convert.ToDateTime(dd.Rows[0]["Arrival Date"]);
-                for (int i = 0; i < staydays; i++)
+                deptdate = Convert.ToDateTime(dd.Rows[0]["Depature Date"]);
+                for (DateTime i = arrdate; i <= deptdate; i=i.AddDays(1))
                 {
-                    for (int k = 1; k <= 4; k++)
+                    for (int k = 1; k <= 3; k++)
                     {
                         row = d.NewRow();
                         if (k == 1)
                         {
-                            row["Date"] = arrdate.AddDays(i);
+                            row["Date"] = i;
                             row["Bill/voucher"] = "Advance";
-                            if(i == 0)
+                            if(i == arrdate)
                             { adv = Convert.ToDecimal(dd.Rows[0]["Advance"]); row["Credit"] = adv; }
                             else { adv = Convert.ToDecimal(0.00); row["Credit"] = adv; }
                             
                         }
                         else if (k == 2)
                         {
-                            row["Date"] = arrdate.AddDays(i);
+                            row["Date"] = i;
                             row["Bill/voucher"] = "Tarrif Amount";
                             trf = Convert.ToDecimal(dd.Rows[0]["Tariff"]); ///staydays;
                             row["Debit"] = trf;
                         }
                         else if (k == 3)
                         {
-                            row["Date"] = arrdate.AddDays(i);
+                            row["Date"] = i;
                             row["Bill/voucher"] = "LUX-Taxes";
                             tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"]); // / staydays;
                             row["Debit"] = tax;
                         }
-                        else if (k == 4)
-                        {
-                            row["Date"] = arrdate.AddDays(i);
-                            row["Bill/voucher"] = "SER-Taxes";
-                            row["Debit"] = "0.00";
-                        }
+                        //else if (k == 4)
+                        //{
+                        //    row["Date"] = i;
+                        //    row["Bill/voucher"] = "SER-Taxes";
+                        //    row["Debit"] = "0.00";
+                        //}
                         d.Rows.Add(row);
                     }
                     td = trf + tax;
