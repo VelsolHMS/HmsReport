@@ -45,7 +45,7 @@ namespace HmsReport.Model
         public DataTable TariffAmounts()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT [Arrival Date],Advance,Tariff,[Stayed Days],[LUX Tax] FROM Sheet1$ where [Invoice No] = '" + ino+"'";
+            string S = "SELECT [Arrival Date],[Depature Date],Advance,Tariff,[Stayed Days],[LUX Tax] FROM Sheet1$ where [Invoice No] = '" + ino+"'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
