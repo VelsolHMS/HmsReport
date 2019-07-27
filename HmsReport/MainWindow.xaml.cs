@@ -24,9 +24,9 @@ namespace HmsReport
         public MainWindow()
         {
             InitializeComponent();
-            ch.ino = 1;
-            ch.inv = 1;
-            ch.invoice = 1;
+            ch.ino = 889;
+            ch.inv = 889;
+            ch.invoice = 889;
         }
         Checkout ch = new Checkout();
         ReportDocument re = new ReportDocument();
@@ -98,6 +98,10 @@ namespace HmsReport
                         {
                             row["Date"] = i;
                             row["Bill/voucher"] = "LUX-Taxes";
+                            if (dd.Rows[0]["LUX Tax"].ToString() == null || dd.Rows[0]["LUX Tax"].ToString() == "")
+                            {
+                                tax = 0;
+                            }
                             tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"])/ staydays;
                             row["Debit"] = tax;
                         }
