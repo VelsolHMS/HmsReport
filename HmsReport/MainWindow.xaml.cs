@@ -86,7 +86,7 @@ namespace HmsReport
                         {
                             row["Date"] = i;
                             row["Bill/voucher"] = "LUX-Taxes";
-                            tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"]); // / staydays;
+                            tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"])/ staydays;
                             row["Debit"] = tax;
                         }
                         //else if (k == 4)
@@ -134,7 +134,7 @@ namespace HmsReport
             row["State"] = dt.Rows[0]["State"].ToString();
             row["ResNo"] = dt.Rows[0]["REG NO"].ToString();
             row["Room"] = dt.Rows[0]["Room No"].ToString();
-            row["Pax"] = dt.Rows[0]["Pax"].ToString();
+            row["Pax"] = 2; // dt.Rows[0]["Pax"].ToString();
             row["Invoice"] = dt.Rows[0]["Invoice No"].ToString();
             row["Type"] = dt.Rows[0]["Room Type"].ToString();
             row["Tarrif"] = dt.Rows[0]["Tariff"].ToString();
@@ -159,7 +159,7 @@ namespace HmsReport
                 DataRow row = d.NewRow();
                 adv1 = Convert.ToDecimal(da.Rows[0]["Advance"].ToString());
                 gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
-                gtax = Convert.ToDecimal(da.Rows[0]["Tax"])*staydays;
+                gtax = Convert.ToDecimal(da.Rows[0]["Tax"]); // *staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
                 {dis = Convert.ToDecimal(0.00);}
                 else
