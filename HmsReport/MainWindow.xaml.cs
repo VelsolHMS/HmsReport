@@ -61,7 +61,7 @@ namespace HmsReport
                 staydays = Convert.ToInt32(dd.Rows[0]["Stayed Days"]);
                 arrdate = Convert.ToDateTime(dd.Rows[0]["Arrival Date"]);
                 deptdate = Convert.ToDateTime(dd.Rows[0]["Depature Date"]);
-                for (DateTime i = arrdate; i <= deptdate; i=i.AddDays(1))
+                for (DateTime i = arrdate; i < deptdate; i=i.AddDays(1))
                 {
                     for (int k = 1; k <= 3; k++)
                     {
@@ -123,14 +123,14 @@ namespace HmsReport
             d.Columns.Add("Tarrif", typeof(decimal));
             d.Columns.Add("ArrivalDate", typeof(string));
             d.Columns.Add("DepartureDate", typeof(string));
-            d.Columns.Add("ArrivalTime", typeof(DateTime));
-            d.Columns.Add("DepartureTime", typeof(DateTime));
+            d.Columns.Add("ArrivalTime", typeof(string));
+            d.Columns.Add("DepartureTime", typeof(string));
 
             DataTable dt = ch.InvoiceData();
             DataRow row = d.NewRow();
             row["Name"] = dt.Rows[0]["Name"].ToString();
             row["Address"] = dt.Rows[0]["Address Line 1"].ToString();
-            row["City"] = dt.Rows[0]["Area"].ToString();
+            row["City"] = dt.Rows[0]["city"].ToString();
             row["State"] = dt.Rows[0]["State"].ToString();
             row["ResNo"] = dt.Rows[0]["REG NO"].ToString();
             row["Room"] = dt.Rows[0]["Room No"].ToString();
@@ -140,8 +140,8 @@ namespace HmsReport
             row["Tarrif"] = dt.Rows[0]["Tariff"].ToString();
             row["ArrivalDate"] = dt.Rows[0]["Arrival Date"].ToString();
             row["DepartureDate"] = dt.Rows[0]["Depature Date"].ToString();
-            row["ArrivalTime"] = dt.Rows[0]["Arrival Time"].ToString();
-            row["DepartureTime"] = dt.Rows[0]["Depature Time"].ToString();
+            row["ArrivalTime"] = dt.Rows[0]["Arrival Time"];
+            row["DepartureTime"] = dt.Rows[0]["Depature Time"];
             d.Rows.Add(row);
             ch.invoice++;
             return d;
@@ -161,10 +161,10 @@ namespace HmsReport
                 gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
                 gtax = Convert.ToDecimal(da.Rows[0]["Tax"])*staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
-                { dis = Convert.ToDecimal(0.00); }
+                {dis = Convert.ToDecimal(0.00);}
                 else
-                { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString()); }
-                row["GrandTotal"] = (gtot - adv1) + gtax ;
+                { dis = Convert.ToDecimal(da.Rows[0]["Discount"].ToString());}
+                row["GrandTotal"] = (gtot - adv1) + gtax;
                 row["Total"] = Convert.ToDecimal(da.Rows[0]["Tariff"].ToString());
                 row["Tax"] = gtax;
                 row["Discount"] = dis;

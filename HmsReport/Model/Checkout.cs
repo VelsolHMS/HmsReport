@@ -14,7 +14,7 @@ namespace HmsReport.Model
         public int InvoiceNo;
         public string Name;
         public string AddressLine1;
-        public string Area;
+        public string city;
         public string State;
         public string Country;
         public int REGNO;
@@ -38,29 +38,29 @@ namespace HmsReport.Model
         public DataTable InvoiceCount()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT Count([Invoice No]) AS Invoice FROM Sheet1$";
+            string S = "SELECT Count([Invoice No]) AS Invoice FROM Apr2014$";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
         public DataTable TariffAmounts()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT [Arrival Date],[Depature Date],Advance,Tariff,[Stayed Days],[LUX Tax] FROM Sheet1$ where [Invoice No] = '" + ino+"'";
+            string S = "SELECT [Arrival Date],[Depature Date],Advance,Tariff,[Stayed Days],[LUX Tax] FROM Apr2014$ where [Invoice No] = '" + ino+"'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
         public DataTable TotalAmounts()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT Sum(Advance) AS Advance,Sum(Total) AS Tariff,Sum([Total After Discount]) AS Total,Sum([LUX Tax]) AS Tax,Sum([Discount Amount]) AS Discount  FROM Sheet1$ where [Invoice No] = '" + inv + "'";
+            string S = "SELECT Sum(Advance) AS Advance,Sum(Total) AS Tariff,Sum([Total After Discount w/o tax]) AS Total,Sum([LUX Tax]) AS Tax,Sum([Discount Amount]) AS Discount  FROM Apr2014$ where [Invoice No] = '" + inv + "'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
         public DataTable InvoiceData()
         {
             var LIST = new List<SqlParameter>();
-            string S = "SELECT Name,[Address Line 1],Area,State,[REG NO],[Room No],"+
-                "Pax,CONVERT(VARCHAR(10),[Arrival Date],103) AS [Arrival Date], CONVERT(VARCHAR(10),[Depature Date],103) AS [Depature Date],[Invoice No],[Room Type],Tariff,[Arrival Time],[Depature Time] FROM Sheet1$ where [Invoice No] = '" + invoice + "'";
+            string S = "SELECT Name,[Address Line 1],city,State,[REG NO],[Room No],"+
+                "Pax,CONVERT(VARCHAR(10),[Arrival Date],103) AS [Arrival Date], CONVERT(VARCHAR(10),[Depature Date],103) AS [Depature Date],[Invoice No],[Room Type],Tariff,[Arrival Time],[Depature Time] FROM Apr2014$ where [Invoice No] = '" + invoice + "'";
             DataTable d = DbFunctions.ExecuteCommand<DataTable>(S, LIST);
             return d;
         }
