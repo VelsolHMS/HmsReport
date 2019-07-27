@@ -57,6 +57,29 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Advance" msprop:Generator_TableClassName="AdvanceDataTable" msprop:Generator_TableVarName="tableAdvance" msprop:Generator_RowChangedName="AdvanceRowChanged" msprop:Generator_TablePropName="Advance" msprop:Generator_RowDeletingName="AdvanceRowDeleting" msprop:Generator_RowChangingName="AdvanceRowChanging" msprop:Generator_RowEvHandlerName="AdvanceRowChangeEventHandler" msprop:Generator_RowDeletedName="AdvanceRowDeleted" msprop:Generator_RowClassName="AdvanceRow" msprop:Generator_UserTableName="Advance" msprop:Generator_RowEvArgName="AdvanceRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Tarrif" msprop:Generator_ColumnVarNameInTable="columnTarrif" msprop:Generator_ColumnPropNameInRow="Tarrif" msprop:Generator_ColumnPropNameInTable="TarrifColumn" msprop:Generator_UserColumnName="Tarrif" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Luxtax" msprop:Generator_ColumnVarNameInTable="columnLuxtax" msprop:Generator_ColumnPropNameInRow="Luxtax" msprop:Generator_ColumnPropNameInTable="LuxtaxColumn" msprop:Generator_UserColumnName="Luxtax" type="xs:decimal" minOccurs="0" />
+              <xs:element name="advance" msprop:Generator_ColumnVarNameInTable="columnadvance" msprop:Generator_ColumnPropNameInRow="advance" msprop:Generator_ColumnPropNameInTable="advanceColumn" msprop:Generator_UserColumnName="advance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="balance" msprop:Generator_ColumnVarNameInTable="columnbalance" msprop:Generator_ColumnPropNameInRow="balance" msprop:Generator_ColumnPropNameInTable="balanceColumn" msprop:Generator_UserColumnName="balance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="totaltarrif" msprop:Generator_ColumnVarNameInTable="columntotaltarrif" msprop:Generator_ColumnPropNameInRow="totaltarrif" msprop:Generator_ColumnPropNameInTable="totaltarrifColumn" msprop:Generator_UserColumnName="totaltarrif" type="xs:decimal" minOccurs="0" />
+              <xs:element name="totalcredit" msprop:Generator_ColumnVarNameInTable="columntotalcredit" msprop:Generator_ColumnPropNameInRow="totalcredit" msprop:Generator_ColumnPropNameInTable="totalcreditColumn" msprop:Generator_UserColumnName="totalcredit" type="xs:decimal" minOccurs="0" />
+              <xs:element name="totalbalance" msprop:Generator_ColumnVarNameInTable="columntotalbalance" msprop:Generator_ColumnPropNameInRow="totalbalance" msprop:Generator_ColumnPropNameInTable="totalbalanceColumn" msprop:Generator_UserColumnName="totalbalance" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable2" msprop:Generator_TableClassName="DataTable2DataTable" msprop:Generator_TableVarName="tableDataTable2" msprop:Generator_TablePropName="DataTable2" msprop:Generator_RowDeletingName="DataTable2RowDeleting" msprop:Generator_RowChangingName="DataTable2RowChanging" msprop:Generator_RowEvHandlerName="DataTable2RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable2RowDeleted" msprop:Generator_UserTableName="DataTable2" msprop:Generator_RowChangedName="DataTable2RowChanged" msprop:Generator_RowEvArgName="DataTable2RowChangeEvent" msprop:Generator_RowClassName="DataTable2Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="totaltarrif" msprop:Generator_ColumnVarNameInTable="columntotaltarrif" msprop:Generator_ColumnPropNameInRow="totaltarrif" msprop:Generator_ColumnPropNameInTable="totaltarrifColumn" msprop:Generator_UserColumnName="totaltarrif" type="xs:string" minOccurs="0" />
+              <xs:element name="totalcredit" msprop:Generator_ColumnVarNameInTable="columntotalcredit" msprop:Generator_ColumnPropNameInRow="totalcredit" msprop:Generator_ColumnPropNameInTable="totalcreditColumn" msprop:Generator_UserColumnName="totalcredit" type="xs:string" minOccurs="0" />
+              <xs:element name="totalbalanace" msprop:Generator_ColumnVarNameInTable="columntotalbalanace" msprop:Generator_ColumnPropNameInRow="totalbalanace" msprop:Generator_ColumnPropNameInTable="totalbalanaceColumn" msprop:Generator_UserColumnName="totalbalanace" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
