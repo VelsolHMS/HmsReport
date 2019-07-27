@@ -102,7 +102,10 @@ namespace HmsReport
                             {
                                 tax = 0;
                             }
-                            tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"])/ staydays;
+                            else
+                            {
+                                tax = Convert.ToDecimal(dd.Rows[0]["LUX Tax"]) / staydays;
+                            }
                             row["Debit"] = tax;
                         }
                         //else if (k == 4)
