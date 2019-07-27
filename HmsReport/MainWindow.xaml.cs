@@ -127,7 +127,7 @@ namespace HmsReport
             d.Columns.Add("Address", typeof(string));
             d.Columns.Add("City", typeof(string));
             d.Columns.Add("State", typeof(string));
-            d.Columns.Add("ResNo", typeof(string));
+         //   d.Columns.Add("ResNo", typeof(string));
             d.Columns.Add("Room", typeof(string));
             d.Columns.Add("Pax", typeof(string));
             d.Columns.Add("Invoice", typeof(string));
@@ -144,7 +144,7 @@ namespace HmsReport
             row["Address"] = dt.Rows[0]["Address Line 1"].ToString();
             row["City"] = dt.Rows[0]["city"].ToString();
             row["State"] = dt.Rows[0]["State"].ToString();
-            row["ResNo"] = dt.Rows[0]["REG NO"].ToString();
+        //    row["ResNo"] = dt.Rows[0]["REG NO"].ToString();
             row["Room"] = dt.Rows[0]["Room No"].ToString();
             row["Pax"] = 2; // dt.Rows[0]["Pax"].ToString();
             row["Invoice"] = dt.Rows[0]["Invoice No"].ToString();
