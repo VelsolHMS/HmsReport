@@ -49,9 +49,9 @@ namespace HmsReport
                // re.PrintToPrinter(0, false, 0, 0);
                 re.Refresh();
                 IG = ch.invoice;
-                if (File.Exists(@"D:\Apr" + (IG - 1) + ".pdf"))
-                    File.Delete(@"D:\Apr" + (IG - 1) + ".pdf");
-                re.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, @"D:\Apr" + (IG - 1) + ".pdf");
+                if (File.Exists(@"D:\" + (IG - 1) + ".pdf"))
+                    File.Delete(@"D:\" + (IG - 1) + ".pdf");
+                re.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, @"D:\" + (IG - 1) + ".pdf");
             }
         }
         public DataRow row;
@@ -178,7 +178,14 @@ namespace HmsReport
                 DataRow row = d.NewRow();
                 adv1 = Convert.ToDecimal(da.Rows[0]["Advance"].ToString());
                 gtot = Convert.ToDecimal(da.Rows[0]["Total"].ToString());
-                gtax = Convert.ToDecimal(da.Rows[0]["Tax"]); // *staydays;
+                if (da.Rows[0]["Tax"].ToString() == null || da.Rows[0]["Tax"].ToString() == "")
+                {
+                    gtax = 0;
+                }
+                else
+                {
+                    gtax = Convert.ToDecimal(da.Rows[0]["Tax"]);
+                }// *staydays;
                 if (da.Rows[0]["Discount"].ToString() == null || da.Rows[0]["Discount"].ToString() == "")
                 {dis = Convert.ToDecimal(0.00);}
                 else
