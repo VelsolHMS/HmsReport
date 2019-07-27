@@ -2,7 +2,14 @@
 using HmsReport.Model;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
+using CrystalDecisions.Shared;
+using System.Web;
+using System.Collections.Generic;
+using Microsoft.SqlServer.Server;
+using System.Configuration;
+using System.IO;
 
 namespace HmsReport
 {
@@ -11,7 +18,7 @@ namespace HmsReport
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int incount,staydays;
+        public int incount,staydays,IG;
         public DateTime arrdate,deptdate;
         public decimal adv,trf,tax,td,tc,gtot,gtax,dis,adv1;
         public MainWindow()
@@ -22,9 +29,10 @@ namespace HmsReport
             ch.invoice = 1;
         }
         Checkout ch = new Checkout();
+        ReportDocument re = new ReportDocument();
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            ReportDocument re = new ReportDocument();
+            
             DataTable dkr = ch.InvoiceCount();
             incount = Convert.ToInt32(dkr.Rows[0]["Invoice"]);
             for (int i = 1; i <= incount; i++)
@@ -38,8 +46,12 @@ namespace HmsReport
                 re.Subreports[1].SetDataSource(dt);
                 re.Subreports[0].SetDataSource(d);
                 re.SetDataSource(dd);
-                re.PrintToPrinter(0, false, 0, 0);
+               // re.PrintToPrinter(0, false, 0, 0);
                 re.Refresh();
+                IG = ch.invoice;
+                if (File.Exists(@"D:\Apr" + (IG - 1) + ".pdf"))
+                    File.Delete(@"D:\Apr" + (IG - 1) + ".pdf");
+                re.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, @"D:\Apr" + (IG - 1) + ".pdf");
             }
         }
         public DataRow row;
@@ -173,5 +185,16 @@ namespace HmsReport
             ch.inv++;
             return d;
         }
+        //public string MapPath(string path);
+        //string filepath;
+        //public void p()
+        //{
+        //    filepath = Server.MapPath("~/" + "a.pdf");
+        //    re.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, filepath);
+        //    System.IO.FileInfo fileinfo = new System.IO.FileInfo(filepath);
+        //    Response.AddHeader("Content-Disposition", "inline;filename=a.pdf");
+        //    Response.ContentType = "application/pdf";
+        //    Response.Writefile(fileinfo.FullName);
+        //}
     }
 }
